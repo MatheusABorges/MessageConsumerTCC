@@ -13,6 +13,10 @@ java {
 	}
 }
 
+bootJar {
+	archiveFileName = 'message-consumer.jar'
+}
+
 repositories {
 	mavenCentral()
 }
