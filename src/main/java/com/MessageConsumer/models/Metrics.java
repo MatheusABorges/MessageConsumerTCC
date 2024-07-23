@@ -20,4 +20,12 @@ public class Metrics {
     public void appendLatency(float latency){
         this.latencies.add(latency);
     }
+
+    public List<Long> getTimestamps() {
+        return timestamps;
+    }
+
+    public List<Float> getLatencies() {
+        return latencies;
+    }
 }
