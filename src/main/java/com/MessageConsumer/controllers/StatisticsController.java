@@ -18,11 +18,6 @@ public class StatisticsController {
     @Autowired
     private ApiService apiService;
 
-    @GetMapping("/statistics")
-    public Statistics getStatistics() {
-        return new Statistics(udpReceiverService.getMessageCount(), udpReceiverService.getFilteredCount());
-    }
-
     @PostMapping("/benchmark")
     public String startBenchmark(@RequestBody StatisticsDTO statisticsDTO){
         String response = apiService.sendSubscriptionRequest(statisticsDTO.getCarteiroUrl(), statisticsDTO.getSubscriptionDTO());
@@ -34,24 +29,8 @@ public class StatisticsController {
     @GetMapping("/results")
     @ResponseStatus(HttpStatus.OK)
     public Metrics getResults(){
-        return (udpReceiverService.getMetrics());
-    }
-
-    static class Statistics {
-        private final int messageCount;
-        private final int filteredCount;
-
-        public Statistics(int messageCount, int filteredCount) {
-            this.messageCount = messageCount;
-            this.filteredCount = filteredCount;
-        }
-
-        public int getMessageCount() {
-            return messageCount;
-        }
-
-        public int getFilteredCount() {
-            return filteredCount;
-        }
+        var metrics =  udpReceiverService.getMetrics();
+        udpReceiverService.resetMetrics();
+        return(metrics);
     }
 }
