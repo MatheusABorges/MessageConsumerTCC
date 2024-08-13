@@ -49,8 +49,8 @@ public class UdpReceiverService {
         metrics.appendTimestamp(timestamp);
     }
 
-    public Metrics getMetrics() {
-        return this.metrics;
+    public String getMetrics() {
+        return this.metrics.generateJsonStatistics();
     }
 
     public void resetMetrics(){

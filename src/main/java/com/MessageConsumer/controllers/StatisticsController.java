@@ -28,7 +28,7 @@ public class StatisticsController {
 
     @GetMapping("/results")
     @ResponseStatus(HttpStatus.OK)
-    public Metrics getResults(){
+    public String getResults(){
         var metrics =  udpReceiverService.getMetrics();
         udpReceiverService.resetMetrics();
         return(metrics);
